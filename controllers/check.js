@@ -7,7 +7,7 @@ export default async function (req, res){
         const isTokenValid = jwt.verify(token, public_key, { algorithm: `RS256` })
     
         if(isTokenValid){
-            res.send(`Autherized...`)
+            res.send(isTokenValid)
         }
         else{
             res.status(400).send(`Invalid token...`)
