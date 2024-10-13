@@ -14,6 +14,6 @@ export default async function (req, res){
         }
     }
     catch(err){
-        res.status(500).send(`Server busy...`)
+        res.status(500).json({error: err})
     }
 }
