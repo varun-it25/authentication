@@ -2,19 +2,18 @@ import jwt from "jsonwebtoken"
 import { public_key } from "../config.js"
 
 export default async function (req, res){
-    const { token, user_key } = req.body
+    const { token } = req.body
     try{
         const isTokenValid = jwt.verify(token, public_key, { algorithm: `RS256` })
-        const user = await userModel.findOne({user_key})
     
-        if(isTokenValid && user){
+        if(isTokenValid){
             res.send(`Autherized...`)
         }
         else{
-            res.send(`Invalid user_key...`)
+            res.status(400).send(`Invalid token...`)
         }
     }
     catch(err){
-        res.send(err.message)
+        res.status(500).send(`Server busy...`)
     }
 }
